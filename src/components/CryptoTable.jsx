@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import { api } from "../services/api";
 
 const tabs = ["Tradable", "Top gainers", "New on Coinbase"];
 const POLL_MS = 3000;
@@ -99,7 +100,7 @@ const AnimatedPrice = ({ value, dir }) => {
   const animClass = dir ? (dir === "up" ? "flip-up" : "flip-down") : "";
 
   return (
-    <span className="inline-flex tabular-nums text-[36px] leading-[1em] font-normal text-white">
+    <span className="inline-flex tabular-nums text-[24px] lg:text-[36px] leading-[1em] font-normal text-white">
       {chars.map((char, i) => (
         <span
           key={`${value}-${i}`}
@@ -138,7 +139,7 @@ const AssetRow = ({ asset }) => {
               e.currentTarget.src = `https://placehold.co/32x32/32353D/ffffff?text=${asset.symbol.slice(0, 2)}`;
             }}
           />
-          <p className="text-[36px] font-semibold text-white m-0 truncate">
+          <p className="text-[24px] lg:text-[36px] font-semibold text-white m-0 truncate">
             {asset.name}
           </p>
         </div>
@@ -191,18 +192,18 @@ const CryptoTable = () => {
   const [error, setError] = useState(null);
   const ghsRate = useRef(FALLBACK_GHS);
 
-  /* ── Merge fresh Binance ticker data into state ── */
+  /* ── Merge fresh backend ticker data into state ── */
   const applyTickers = useCallback((tickers) => {
     setCoinsMap((prev) => {
       const next = { ...prev };
       tickers.forEach((t) => {
-        const meta = COIN_META_MAP[t.symbol];
-        if (!meta) return;
+        const symbol = t.symbol || t.id;
+        if (!symbol) return;
 
-        const newUsd = parseFloat(t.lastPrice);
+        const newUsd = parseFloat(t.current_price || t.price || 0);
         const newPrice = newUsd * ghsRate.current;
-        const newChange = parseFloat(t.priceChangePercent);
-        const old = prev[t.symbol];
+        const newChange = parseFloat(t.price_change_percentage_24h || t.change24h || 0);
+        const old = prev[symbol];
         const oldPrice = old?.current_price ?? null;
 
         // Direction: up / down / null (no change or first load)
@@ -212,10 +213,10 @@ const CryptoTable = () => {
           else if (newPrice < oldPrice - 0.0001) dir = "down";
         }
 
-        next[t.symbol] = {
-          id: t.symbol,
-          name: meta.name,
-          symbol: meta.symbol,
+        next[symbol] = {
+          id: t._id || t.id || symbol,
+          name: t.name || symbol,
+          symbol: symbol,
           current_price: newPrice,
           price_change_percentage_24h: newChange,
           dir,
@@ -227,13 +228,9 @@ const CryptoTable = () => {
     });
   }, []);
 
-  /* ── Fetch from Binance ── */
+  /* ── Fetch from Backend ── */
   const fetchPrices = useCallback(async () => {
-    const res = await fetch(
-      `https://api.binance.com/api/v3/ticker/24hr?symbols=${BINANCE_SYMBOLS}`,
-    );
-    if (!res.ok) throw new Error(`Binance ${res.status}`);
-    return res.json();
+    return api.crypto.getAll();
   }, []);
 
   /* ── Initial load: prices + GHS rate ── */
@@ -292,7 +289,7 @@ const CryptoTable = () => {
   }, [loading, error, fetchPrices, applyTickers]);
 
   /* ── Derive ordered arrays ── */
-  const allCoins = COIN_META.map((c) => coinsMap[c.binance]).filter(Boolean);
+  const allCoins = Object.values(coinsMap);
 
   const getTabData = (tab) => {
     if (!allCoins.length) return [];
@@ -308,7 +305,7 @@ const CryptoTable = () => {
           )
           .slice(0, 6);
       case "New on Coinbase":
-        return allCoins.slice(14, 20);
+        return allCoins.slice(-6).reverse();
       default:
         return [];
     }
@@ -317,7 +314,7 @@ const CryptoTable = () => {
   const currentData = getTabData(activeTab);
 
   return (
-    <div className="flex flex-col w-full bg-gray-100  rounded-4xl p-10 min-h-134.5">
+    <div className="flex flex-col w-full bg-gray-100 rounded-4xl p-10 min-h-134.5">
       {/* Tabs */}
       <div className="flex gap-4 mb-4">
         <div
@@ -332,7 +329,7 @@ const CryptoTable = () => {
                 role="tab"
                 aria-selected={isActive}
                 className={`
-									flex items-center justify-center px-4 h-10 min-w-25
+									flex items-center justify-center px-1 lg:px-4 h-10 
 									border-none rounded-full whitespace-nowrap
 									text-label-1 cursor-pointer transition-all duration-200
 									${

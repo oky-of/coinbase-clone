@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "../components/ui/Logo";
+import { useAuth } from "../context/AuthContext";
 
 /* ── Icons ── */
 const PasskeyIcon = () => (
@@ -107,17 +108,28 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleEmailContinue = (e) => {
     e.preventDefault();
     if (email.trim()) setStep("password");
   };
 
-  const handlePasswordContinue = (e) => {
+  const handlePasswordContinue = async (e) => {
     e.preventDefault();
-    // No backend — navigate to verify code page
-    navigate("/verify", { state: { email } });
+    setError("");
+    setIsLoading(true);
+    try {
+      await login(email, password);
+      navigate("/profile");
+    } catch (err) {
+      setError(err.message || "Failed to sign in");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -137,11 +149,14 @@ const SignIn = () => {
               <h1 className="text-[1.75rem] font-bold text-white mb-6">
                 Sign in to Coinbase
               </h1>
+              <span className="text-red-500  font-normal ">
+                Demo app - do not use your real email
+              </span>
 
               {/* Email field */}
               <div className="mb-4">
-                <label className="block text-[0.875rem] font-medium text-white mb-1.5">
-                  Email
+                <label className="block  gap-5 text-[0.875rem] font-medium mb-1.5">
+                  <span className="text-white mr-15 ">Email</span>
                 </label>
                 <input
                   type="email"
@@ -247,6 +262,13 @@ const SignIn = () => {
                 </div>
               </div>
 
+              {/* Error message */}
+              {error && (
+                <div className="mb-4 text-red-500 text-sm font-medium">
+                  {error}
+                </div>
+              )}
+
               {/* Forgot password */}
               <div className="mb-6">
                 <Link
@@ -260,8 +282,9 @@ const SignIn = () => {
               {/* Continue button */}
               <button
                 type="submit"
-                className="w-full h-14 rounded-full bg-[#3B4DE0] hover:bg-[#2F3FC0] active:bg-[#2535A0] text-white font-semibold text-[0.9375rem] transition-colors">
-                Continue
+                disabled={isLoading}
+                className="w-full h-14 rounded-full bg-[#3B4DE0] hover:bg-[#2F3FC0] active:bg-[#2535A0] disabled:bg-gray-500 text-white font-semibold text-[0.9375rem] transition-colors">
+                {isLoading ? "Signing in..." : "Continue"}
               </button>
             </form>
           )}

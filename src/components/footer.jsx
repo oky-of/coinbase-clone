@@ -10,80 +10,65 @@ const COLUMNS = [
       {
         title: "Company",
         links: [
-          { label: "About", href: "https://www.coinbase.com/about" },
-          { label: "Careers", href: "https://www.coinbase.com/careers" },
-          { label: "Affiliates", href: "https://www.coinbase.com/affiliates" },
-          { label: "Blog", href: "https://www.coinbase.com/blog" },
-          { label: "Press", href: "https://www.coinbase.com/press" },
-          { label: "Security", href: "https://www.coinbase.com/security" },
-          { label: "Investors", href: "https://investor.coinbase.com/" },
+          { label: "About" },
+          { label: "Careers"},
+          { label: "Affiliates"},
+          { label: "Blog"},
+          { label: "Press"},
+          { label: "Security"},
+          { label: "Investors"},
           {
             label: "Vendors",
-            href: "https://www.coinbase.com/vendors/vendors-at-coinbase",
           },
-          { label: "Legal & privacy", href: "https://www.coinbase.com/legal" },
+          { label: "Legal & privacy"},
           {
             label: "Cookie policy",
-            href: "https://www.coinbase.com/legal/cookie",
           },
-          { label: "Cookie preferences", href: "#" },
+          { label: "Cookie preferences"},
           {
             label: "Digital Asset Disclosures",
-            href: "https://www.coinbase.com/legal/digital-asset-disclosures",
           },
         ],
       },
       {
         title: "Learn",
         links: [
-          { label: "Explore", href: "https://www.coinbase.com/explore" },
+          { label: "Explore"},
           {
             label: "Market statistics",
-            href: "https://www.coinbase.com/market-stats",
           },
           {
             label: "Coinbase Bytes newsletter",
-            href: "https://www.coinbase.com/bytes",
           },
           {
             label: "Crypto basics",
-            href: "https://www.coinbase.com/learn/crypto-basics",
           },
           {
             label: "Tips & tutorials",
-            href: "https://www.coinbase.com/learn/tips-and-tutorials",
           },
           {
             label: "Crypto glossary",
-            href: "https://www.coinbase.com/learn/crypto-glossary",
           },
           {
             label: "Market updates",
-            href: "https://www.coinbase.com/learn/market-updates",
           },
           {
             label: "What is Bitcoin?",
-            href: "https://www.coinbase.com/learn/crypto-basics/what-is-bitcoin",
           },
           {
             label: "What is crypto?",
-            href: "https://www.coinbase.com/learn/crypto-basics/what-is-cryptocurrency",
           },
           {
             label: "What is a blockchain?",
-            href: "https://www.coinbase.com/learn/crypto-basics/what-is-a-blockchain",
           },
           {
             label: "How to set up a crypto wallet?",
-            href: "https://www.coinbase.com/learn/tips-and-tutorials/how-to-set-up-a-crypto-wallet",
           },
           {
             label: "How to send crypto?",
-            href: "https://www.coinbase.com/learn/tips-and-tutorials/how-to-send-crypto",
           },
           {
             label: "Taxes",
-            href: "https://www.coinbase.com/learn/crypto-basics/understanding-crypto-taxes",
           },
         ],
       },
@@ -95,14 +80,13 @@ const COLUMNS = [
       {
         title: "Individuals",
         links: [
-          { label: "Buy & sell", href: "https://www.coinbase.com/" },
+          { label: "Buy & sell" },
           {
             label: "Earn free crypto",
-            href: "https://www.coinbase.com/learning-rewards",
           },
-          { label: "Base App", href: "https://base.app" },
-          { label: "Coinbase One", href: "https://www.coinbase.com/one" },
-          { label: "Debit Card", href: "https://www.coinbase.com/card" },
+          { label: "Base App" },
+          { label: "Coinbase One" },
+          { label: "Debit Card" },
         ],
       },
       {
@@ -110,40 +94,34 @@ const COLUMNS = [
         links: [
           {
             label: "Asset Listings",
-            href: "https://www.coinbase.com/listings",
           },
           {
             label: "Coinbase Business",
-            href: "https://www.coinbase.com/business",
           },
-          { label: "Payments", href: "https://www.coinbase.com/payments" },
-          { label: "Commerce", href: "https://www.coinbase.com/commerce" },
+          { label: "Payments" },
+          { label: "Commerce" },
           {
             label: "Token Manager",
-            href: "https://www.coinbase.com/tokenmanager",
           },
         ],
       },
       {
         title: "Institutions",
         links: [
-          { label: "Prime", href: "https://www.coinbase.com/prime" },
-          { label: "Staking", href: "https://www.coinbase.com/staking" },
-          { label: "Exchange", href: "https://www.coinbase.com/exchange" },
+          { label: "Prime" },
+          { label: "Staking" },
+          { label: "Exchange" },
           {
             label: "International Exchange",
-            href: "https://www.coinbase.com/international-exchange",
           },
           {
             label: "Derivatives Exchange",
-            href: "https://www.coinbase.com/derivatives",
           },
           {
             label: "Verified Pools",
-            href: "https://www.coinbase.com/verified-pools",
           },
         ],
-      },
+      },  
     ],
   },
   {
@@ -154,77 +132,59 @@ const COLUMNS = [
         links: [
           {
             label: "Developer Platform",
-            href: "https://www.coinbase.com/developer-platform",
           },
-          { label: "Base", href: "https://base.org" },
+          { label: "Base" },
           {
             label: "Server Wallets",
-            href: "https://www.coinbase.com/developer-platform/products/wallets",
           },
           {
             label: "Embedded Wallets",
-            href: "https://www.coinbase.com/developer-platform/products/embeddedwallets",
           },
           {
             label: "Base Accounts (Smart Wallets)",
-            href: "https://www.base.org/build/base-account",
           },
           {
             label: "Onramp & Offramp",
-            href: "https://www.coinbase.com/developer-platform/products/onramp",
           },
-          { label: "x402", href: "https://www.x402.org" },
+          { label: "x402" },
           {
             label: "Trade API",
-            href: "https://www.coinbase.com/developer-platform/products/trade-api",
           },
           {
             label: "Paymaster",
-            href: "https://www.coinbase.com/developer-platform/products/paymaster",
           },
           {
             label: "OnchainKit",
-            href: "https://www.base.org/build/onchainkit",
           },
           {
             label: "Data API",
-            href: "https://www.coinbase.com/developer-platform/products/data-api",
           },
           {
             label: "Verifications",
-            href: "https://www.coinbase.com/developer-platform/products/verifications",
           },
           {
             label: "Node",
-            href: "https://www.coinbase.com/developer-platform/products/node",
           },
           {
             label: "AgentKit",
-            href: "https://www.coinbase.com/developer-platform/products/agentkit",
           },
           {
             label: "Staking",
-            href: "https://www.coinbase.com/developer-platform/products/staking",
           },
           {
             label: "Faucet",
-            href: "https://www.coinbase.com/developer-platform/products/faucet",
           },
           {
             label: "Exchange API",
-            href: "https://www.coinbase.com/developer-platform/products/exchange-api",
           },
           {
             label: "International Exchange API",
-            href: "https://docs.cdp.coinbase.com/international-exchange/introduction/welcome",
           },
           {
             label: "Prime API",
-            href: "https://docs.cdp.coinbase.com/prime/introduction/welcome",
           },
           {
             label: "Derivatives API",
-            href: "https://docs.cdp.coinbase.com/derivatives/introduction/welcome",
           },
         ],
       },
@@ -236,36 +196,29 @@ const COLUMNS = [
       {
         title: "Support",
         links: [
-          { label: "Help center", href: "https://help.coinbase.com" },
+          { label: "Help center" },
           {
             label: "Contact us",
-            href: "https://help.coinbase.com/contact-us/",
           },
           {
             label: "Create account",
-            href: "https://help.coinbase.com/coinbase/getting-started/getting-started-with-coinbase/create-a-coinbase-account/",
           },
           {
             label: "ID verification",
-            href: "https://help.coinbase.com/coinbase/managing-my-account#identity-verification/",
           },
           {
             label: "Account information",
-            href: "https://help.coinbase.com/coinbase/managing-my-account/",
           },
           {
             label: "Payment methods",
-            href: "https://help.coinbase.com/coinbase/getting-started#add-a-payment-method/",
           },
           {
             label: "Account access",
-            href: "https://help.coinbase.com/coinbase/managing-my-account/",
           },
           {
             label: "Supported crypto",
-            href: "https://help.coinbase.com/supported-crypto.html",
           },
-          { label: "Status", href: "https://status.coinbase.com" },
+          { label: "Status" },
         ],
       },
       {
@@ -273,17 +226,14 @@ const COLUMNS = [
         links: [
           {
             label: "Bitcoin price",
-            href: "https://www.coinbase.com/price/bitcoin",
           },
           {
             label: "Ethereum price",
-            href: "https://www.coinbase.com/price/ethereum",
           },
           {
             label: "Solana price",
-            href: "https://www.coinbase.com/price/solana",
           },
-          { label: "XRP price", href: "https://www.coinbase.com/price/xrp" },
+          { label: "XRP price" },
         ],
       },
       {
@@ -291,16 +241,13 @@ const COLUMNS = [
         links: [
           {
             label: "NVIDIA price",
-            href: "https://www.coinbase.com/stock/nvda",
           },
-          { label: "Apple price", href: "https://www.coinbase.com/stock/aapl" },
+          { label: "Apple price"},
           {
             label: "Microsoft price",
-            href: "https://www.coinbase.com/stock/msft",
           },
           {
             label: "Amazon price",
-            href: "https://www.coinbase.com/stock/amzn",
           },
         ],
       },
@@ -311,22 +258,19 @@ const COLUMNS = [
 const SOCIALS = [
   {
     label: "X",
-    href: "https://x.com/coinbase",
+  
     icon: "https://static-assets.coinbase.com/marketing/cdx/x-light.svg",
   },
   {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/company/coinbase",
     icon: "https://static-assets.coinbase.com/marketing/cdx/linkedin-light.svg",
   },
   {
     label: "Instagram",
-    href: "https://www.instagram.com/coinbase/",
     icon: "https://static-assets.coinbase.com/marketing/cdx/instagram-light.svg",
   },
   {
     label: "TikTok",
-    href: "https://www.tiktok.com/@coinbase",
     icon: "https://static-assets.coinbase.com/marketing/cdx/tiktok-light.svg",
   },
 ];
@@ -341,9 +285,6 @@ const FooterSection = ({ title, links }) => (
       {links.map((link) => (
         <a
           key={link.label}
-          href={link.href}
-          target={link.href.startsWith("http") ? "_blank" : undefined}
-          rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
           className="text-[16px] leading-5 text-gray-60 font-medium hover:text-gray-100 transition-colors duration-150">
           {link.label}
         </a>
@@ -369,7 +310,7 @@ const Footer = () => {
 
   return (
     <footer className="flex flex-col items-center bg-gray-10 w-full">
-      <div className="w-full max-w-400 pt-12 pb-8 md:px-8 md:pt-16 md:max-w-307 lg:px-12 lg:pt-20 lg:max-w-400">
+      <div className="w-full max-w-400 pt-6 pb-8 px-4 md:pt-16 md:max-w-307 lg:px-12 lg:pt-20 lg:max-w-400">
         {/* Logo — mobile only */}
         <div className="mb-8 lg:hidden">
           <CoinbaseLogo />
@@ -384,7 +325,7 @@ const Footer = () => {
 
          
           {COLUMNS.map((col) => (
-            <div key={col.id} className="flex flex-col gap-10 flex-1">
+            <div key={col.id} className="flex lg:flex-col lg:gap-10 gap-5 lg:flex-1">
               {col.sections.map((section) => (
                 <FooterSection
                   key={section.title}
@@ -431,16 +372,16 @@ const Footer = () => {
               </p>
               <span className="text-gray-40 text-[0.8125rem]">•</span>
               <a
-                href="https://www.coinbase.com/legal/privacy"
                 className="text-[0.8125rem] leading-5 text-gray-60 hover:text-gray-100 transition-colors">
                 Privacy
               </a>
               <span className="text-gray-40 text-[0.8125rem]">•</span>
               <a
-                href="https://www.coinbase.com/legal/user_agreement"
                 className="text-[0.8125rem] leading-5 text-gray-60 hover:text-gray-100 transition-colors">
                 Terms &amp; Conditions
               </a>
+              <a 
+              className="text-red-600  font-medium text-[0.90rem]">Disclaimer: This is a demo application built for educational purposes only and is not affiliated with Coinbase or any financial institution.</a>
             </div>
 
             {/* Right: locale selector button */}

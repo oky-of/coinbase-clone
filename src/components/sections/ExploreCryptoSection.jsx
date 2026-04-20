@@ -12,7 +12,7 @@ const ExploreCryptoSection = () => {
 						<div className="flex flex-col w-full min-w-0 md:flex-1">
 							<div className="flex flex-col gap-6 items-start">
 								{/* Heading — t1 typography */}
-								<h2 className="md:text-display-3 leading-9 font-semibold  m-0">
+								<h2 className="md:text-display-3  text-display-3 font-semibold  m-0">
 									Explore crypto like Bitcoin, Ethereum, and Dogecoin.
 								</h2>
 

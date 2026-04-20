@@ -14,14 +14,17 @@ import AccountTypeSelect from './pages/AccountTypeSelect';
 import ForgotPassword from './pages/ForgotPassword';
 import VerifyCode from './pages/VerifyCode';
 import ExplorePage from './pages/ExplorePage';
-import MarketStatsPage from './pages/MarketStatsPage';
 import LearnPage from './pages/LearnPage';
-import CryptoBasicsPage from './pages/CryptoBasicsPage';
 import Loader from './components/ui/Loader';
+import WarningBanner from './components/WarningBanner';
 import CoinbaseOneSection from './components/sections/CoinbaseOneSection';
+import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
+import ProfilePage from './pages/ProfilePage';
 
 const Home = () => (
   <div className="min-h-screen flex flex-col">
+    <WarningBanner />
     <Header />
     <main className="flex-1">
       <HeroSection />
@@ -47,18 +50,23 @@ const App = () => {
   if (loading) return <Loader />;
 
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/explore" element={<ExplorePage />} />
-      <Route path="/market-stats" element={<MarketStatsPage />} />
-      <Route path="/signin" element={<SignIn />} />
-      <Route path="/account-type" element={<AccountTypeSelect />} />
-      <Route path="/signup" element={<SignUp />} />
-      <Route path="/forgot-password" element={<ForgotPassword />} />
-      <Route path="/verify" element={<VerifyCode />} />
-      <Route path="/learn" element={<LearnPage />} />
-      <Route path="/learn/crypto-basics" element={<CryptoBasicsPage />} />
-    </Routes>
+    <AuthProvider>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/explore" element={<ExplorePage />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/account-type" element={<AccountTypeSelect />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/verify" element={<VerifyCode />} />
+        <Route path="/learn" element={<LearnPage />} />
+        <Route path="/profile" element={
+          <ProtectedRoute>
+            <ProfilePage />
+          </ProtectedRoute>
+        } />
+      </Routes>
+    </AuthProvider>
   );
 };
 

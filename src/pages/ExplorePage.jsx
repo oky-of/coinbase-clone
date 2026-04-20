@@ -5,6 +5,7 @@ import Footer from "../components/footer";
 import Container from "../components/ui/Container";
 import Button from "../components/ui/Button";
 import FilterDropdown from "../components/ui/FilterDropdown";
+import { api } from "../services/api";
 
 /* ═══════════════════════════════════════════════
 	CONSTANTS & DATA
@@ -686,59 +687,41 @@ const ExplorePage = () => {
     })();
   }, []);
 
-  /* ── Fetch from Binance (same as CryptoTable) ── */
+  /* ── Fetch from Backend ── */
   const fetchPrices = useCallback(async () => {
     try {
-      const res = await fetch(
-        `https://api.binance.com/api/v3/ticker/24hr?symbols=${BINANCE_SYMBOLS}`,
-      );
-      if (!res.ok) throw new Error(`Binance ${res.status}`);
-      return await res.json();
+      let data = [];
+      if (assetFilter === "gainers") {
+        data = await api.crypto.getGainers();
+      } else if (assetFilter === "new") {
+        data = await api.crypto.getNew();
+      } else {
+        data = await api.crypto.getAll();
+      }
+      return data;
     } catch (error) {
-      console.warn("Binance fetch failed, using fallback data:", error);
-      // Fallback mock data structure derived from COIN_META
-      return COIN_META.map((meta, i) => {
-        // Deterministic mock values based on index to look realistic
-        const basePrice = [67200, 3500, 590, 145, 0.5, 0.45, 0.16][i % 7];
-        const lastPrice = (basePrice * (1 + Math.sin(i) * 0.05)).toFixed(4);
-        const priceChangePercent = (Math.sin(i * 1.5) * 5).toFixed(2);
-        return {
-          symbol: meta.binance,
-          lastPrice,
-          priceChangePercent,
-          quoteVolume: (Math.abs(Math.cos(i)) * 1000000000 + 100000000).toFixed(
-            2,
-          ),
-        };
-      });
+      console.warn("Backend fetch failed:", error);
+      return [];
     }
-  }, []);
+  }, [assetFilter]);
 
   const buildCoins = useCallback(
-    (tickers) => {
+    (data) => {
       const rate = getRate();
-      return tickers
+      return data
         .map((t) => {
-          const meta = COIN_META_MAP[t.symbol];
-          if (!meta) return null;
-          const priceUsd = parseFloat(t.lastPrice);
-          const price = priceUsd * rate;
-          const change24h = parseFloat(t.priceChangePercent);
-          const volumeUsd = parseFloat(t.quoteVolume);
-          const mktCap = priceUsd * (meta.supply || 1) * rate;
           return {
-            id: t.symbol,
-            name: meta.name,
-            symbol: meta.symbol,
-            image: getCoinIcon(meta.symbol),
-            current_price: price,
-            price_change_percentage_24h: change24h,
-            market_cap: mktCap,
-            total_volume: volumeUsd * rate,
+            id: t._id || t.id || t.symbol,
+            name: t.name,
+            symbol: t.symbol,
+            image: t.image || (t.symbol ? getCoinIcon(t.symbol) : ""),
+            current_price: (t.current_price || t.price || 0) * rate,
+            price_change_percentage_24h: t.price_change_percentage_24h || t.change24h || 0,
+            market_cap: (t.market_cap || t.mktCap || 0) * rate,
+            total_volume: (t.total_volume || t.volume || 0) * rate,
           };
         })
-        .filter(Boolean)
-        .sort((a, b) => b.market_cap - a.market_cap);
+        .filter(Boolean);
     },
     [getRate],
   );
@@ -789,16 +772,13 @@ const ExplorePage = () => {
         return [...list]
           .sort((a, b) => b.market_cap - a.market_cap)
           .slice(0, 20);
-      case "new":
-        return list.slice(-10);
-      case "gainers":
-        return [...list]
-          .filter((c) => getCoinChange(c) > 0)
-          .sort((a, b) => (getCoinChange(b) ?? 0) - (getCoinChange(a) ?? 0));
       case "losers":
         return [...list]
           .filter((c) => getCoinChange(c) < 0)
           .sort((a, b) => (getCoinChange(a) ?? 0) - (getCoinChange(b) ?? 0));
+      case "gainers":
+      case "new":
+      case "all":
       default:
         return list;
     }

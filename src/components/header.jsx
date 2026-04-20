@@ -11,6 +11,7 @@ import {
 } from "./ui/navbar";
 import SearchDropdown from "./ui/SearchDropdown";
 import LanguageDropdown from "./ui/LanguageDropdown";
+import { useAuth } from "../context/AuthContext";
 
 /* ── Simple icon components ── */
 const Icon = ({ children }) => (
@@ -600,8 +601,8 @@ const DropdownContent = ({ menuKey }) => {
     menu.cols.length > 0 && menu.cols[0]?.header !== undefined;
 
   return (
-    <div className="w-full max-w-307 mx-auto px-8 lg:px-12 py-8">
-      <div className="flex gap-12">
+    <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-12 py-8">
+      <div className="flex flex-wrap gap-12">
         {/* Two item columns */}
         <div className="flex gap-12 flex-1">
           {menu.cols.map((col, i) => (
@@ -657,6 +658,7 @@ const Header = () => {
   const [langOpen, setLangOpen] = useState(false);
   const leaveTimer = useRef(null);
   const searchInputRef = useRef(null);
+  const { user, logout } = useAuth();
 
   const handleEnter = (link) => {
     if (searchActive) return;
@@ -690,13 +692,13 @@ const Header = () => {
       className="sticky top-0 z-50 bg-white border-b border-gray-10"
       onMouseLeave={!searchActive ? handleLeave : undefined}>
       <Container>
-        <nav className="flex items-center justify-between h-16 gap-4">
+        <nav className="flex items-center lg:justify-between h-16 lg:gap-4">
           {/* Left: Logo + Nav — always visible */}
-          <div className="flex items-center gap-8 shrink-0">
+          <div className="flex items-center lg:gap-8 shrink-0">
             <a href="/" className="shrink-0">
               <Logo height={44} />
             </a>
-            <ul className="hidden lg:flex items-center  gap-1 md:gap-10">
+            <ul className="hidden lg:flex items-center md:gap-10">
               {navLinks.map((link) => (
                 <li key={link}>
                   <a
@@ -717,7 +719,7 @@ const Header = () => {
           {/* Right: Actions */}
           {searchActive ? (
             /* ── Search input (only replaces right buttons) ── */
-            <div className="flex items-center gap-2 ">
+            <div className="flex items-center  gap-2 ">
               <div className="flex items-center gap-2 w-75 h-10 px-4 rounded-full border-2 border-blue-60 bg-white">
                 <svg
                   width="16"
@@ -784,17 +786,33 @@ const Header = () => {
                 </AnimatePresence>
               </div>
 
-              {/* Sign in — gray pill */}
-              <Link
-                to="/signin"
-                className="hidden sm:flex items-center py-5.5  h-10 px-7 text-[16px] font-bold text-gray-100 bg-gray-10 hover:bg-gray-15 rounded-full transition-colors whitespace-nowrap">
-                Sign in
-              </Link>
-              <Link
-                to="/account-type"
-                className="inline-flex items-center rounded-pill font-bold transition-all duration-200 bg-blue-60 text-white hover:opacity-90 px-8 py-3 text-[16px] whitespace-nowrap">
-                Sign up
-              </Link>
+              {user ? (
+                <>
+                  <Link
+                    to="/profile"
+                    className="hidden sm:flex items-center py-5.5  h-10 px-7 text-[16px] font-bold text-gray-100 bg-gray-10 hover:bg-gray-15 rounded-full transition-colors whitespace-nowrap">
+                    Profile
+                  </Link>
+                  <button
+                    onClick={logout}
+                    className="inline-flex items-center -ml-6 lg:ml-0 rounded-pill font-bold transition-all duration-200 bg-red-500 text-white hover:opacity-90 px-8 py-3 text-[16px] whitespace-nowrap">
+                    Sign out
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    to="/signin"
+                    className="hidden sm:flex items-center py-5.5  h-10 px-7 text-[16px] font-bold text-gray-100 bg-gray-10 hover:bg-gray-15 rounded-full transition-colors whitespace-nowrap">
+                    Sign in
+                  </Link>
+                  <Link
+                    to="/account-type"
+                    className="inline-flex items-center -ml-6 lg:ml-0 rounded-pill font-bold transition-all duration-200 bg-blue-60 text-white hover:opacity-90 px-8 py-3 text-[16px] whitespace-nowrap">
+                    Sign up
+                  </Link>
+                </>
+              )}
 
               {/* Mobile hamburger — Coinbase icon */}
               <button className="lg:hidden flex w-10 h-10 items-center justify-center rounded-full bg-gray-10 hover:bg-gray-15 transition-colors">

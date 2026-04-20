@@ -324,8 +324,10 @@ function AllSetStep({ onContinue }) {
   );
 }
 import { useState, useRef, useEffect, useCallback } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../components/ui/Logo";
+import { useAuth } from "../context/AuthContext";
+
 
 /* ════════════════════════════════════════════════════
    Shared dark-page shell
@@ -523,12 +525,12 @@ const ChevronRight = () => (
 /* ════════════════════════════════════════════════════
    STEP 0 — Email entry (original sign-up)
    ════════════════════════════════════════════════════ */
-const StepEmail = ({ email, setEmail, onNext }) => (
+const StepEmail = ({ name, setName, email, setEmail, password, setPassword, onSubmit, error, isLoading }) => (
   <Shell>
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        if (email.trim()) onNext();
+        if (email.trim() && name.trim() && password.trim()) onSubmit();
       }}>
       <h1 className="text-[1.75rem] font-bold text-white mb-2">
         Create your account
@@ -536,6 +538,16 @@ const StepEmail = ({ email, setEmail, onNext }) => (
       <p className="text-[0.9375rem] text-[#8A919E] mb-6 leading-6">
         Access all that Coinbase has to offer with a single account.
       </p>
+      <span className="text-red-500  font-normal ">
+        Demo app - do not use your real email
+      </span>
+      <DarkInput
+        label="Name"
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        placeholder="Your full name"
+      />
       <DarkInput
         label="Email"
         type="email"
@@ -543,7 +555,19 @@ const StepEmail = ({ email, setEmail, onNext }) => (
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Your email address"
       />
-      <BlueBtn type="submit">Continue</BlueBtn>
+      <DarkInput
+        label="Password"
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Choose a password"
+      />
+      {error && (
+        <div className="mb-4 text-red-500 text-sm font-medium">
+          {error}
+        </div>
+      )}
+      <BlueBtn type="submit" disabled={isLoading}>{isLoading ? "Creating account..." : "Continue"}</BlueBtn>
 
       <div className="flex items-center gap-3 my-5">
         <div className="flex-1 h-px bg-[#2C2F36]" />
@@ -1196,7 +1220,13 @@ const StepVerifying = () => (
    ════════════════════════════════════════════════════ */
 const SignUp = () => {
   const [step, setStep] = useState(0);
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const { register } = useAuth();
+  const navigate = useNavigate();
   const [citizenship, setCitizenship] = useState("GH");
   const [residence, setResidence] = useState("GH");
   const [birthCity, setBirthCity] = useState("");
@@ -1206,9 +1236,22 @@ const SignUp = () => {
   const next = () => setStep((s) => s + 1);
   const back = () => setStep((s) => Math.max(0, s - 1));
 
+  const handleRegister = async () => {
+    setError("");
+    setIsLoading(true);
+    try {
+      await register(name, email, password);
+      navigate("/profile");
+    } catch (err) {
+      setError(err.message || "Failed to sign up");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   switch (step) {
     case 0:
-      return <StepEmail email={email} setEmail={setEmail} onNext={next} />;
+      return <StepEmail name={name} setName={setName} email={email} setEmail={setEmail} password={password} setPassword={setPassword} onSubmit={handleRegister} error={error} isLoading={isLoading} />;
     case 1:
       return <StepVerifyEmail email={email} onNext={next} />;
     case 2:
