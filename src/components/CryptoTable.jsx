@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { api } from "../services/api";
+import { normalizeBackendCoin } from "../utils/crypto";
 
 const tabs = ["Tradable", "Top gainers", "New on Coinbase"];
 const POLL_MS = 3000;
@@ -41,6 +42,7 @@ const COIN_META = [
 
 // Fast O(1) lookup
 const COIN_META_MAP = Object.fromEntries(COIN_META.map((c) => [c.binance, c]));
+const COIN_SYMBOL_META_MAP = Object.fromEntries(COIN_META.map((c) => [c.symbol, c]));
 const BINANCE_SYMBOLS = encodeURIComponent(
   JSON.stringify(COIN_META.map((c) => c.binance)),
 );
@@ -197,14 +199,16 @@ const CryptoTable = () => {
     setCoinsMap((prev) => {
       const next = { ...prev };
       tickers.forEach((t) => {
-        const symbol = t.symbol || t.id;
-        if (!symbol) return;
+        const symbol = String(t?.symbol || t?.id || "").trim().toUpperCase();
+        const fallbackMeta = COIN_SYMBOL_META_MAP[symbol];
+        const normalized = normalizeBackendCoin(t, fallbackMeta);
 
-        const newUsd = parseFloat(t.current_price || t.price || 0);
-        const newPrice = newUsd * ghsRate.current;
-        const newChange = parseFloat(t.price_change_percentage_24h || t.change24h || 0);
-        const old = prev[symbol];
+        if (!normalized) return;
+
+        const newPrice = normalized.current_price * ghsRate.current;
+        const old = prev[normalized.symbol];
         const oldPrice = old?.current_price ?? null;
+        const newChange = normalized.price_change_percentage_24h;
 
         // Direction: up / down / null (no change or first load)
         let dir = null;
@@ -213,10 +217,10 @@ const CryptoTable = () => {
           else if (newPrice < oldPrice - 0.0001) dir = "down";
         }
 
-        next[symbol] = {
-          id: t._id || t.id || symbol,
-          name: t.name || symbol,
-          symbol: symbol,
+        next[normalized.symbol] = {
+          id: normalized.id,
+          name: normalized.name,
+          symbol: normalized.symbol,
           current_price: newPrice,
           price_change_percentage_24h: newChange,
           dir,

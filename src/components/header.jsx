@@ -11,7 +11,7 @@ import {
 } from "./ui/navbar";
 import SearchDropdown from "./ui/SearchDropdown";
 import LanguageDropdown from "./ui/LanguageDropdown";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/auth-context";
 
 /* ── Simple icon components ── */
 const Icon = ({ children }) => (

@@ -1,16 +1,30 @@
-export const BASE_URL = import.meta.env.VITE_API_URL;
+const rawBaseUrl =
+  import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+const normalizedBaseUrl = rawBaseUrl.replace(/\/+$/, "");
+
+export const BASE_URL = /\/api$/.test(normalizedBaseUrl)
+  ? normalizedBaseUrl
+  : `${normalizedBaseUrl}/api`;
 
 const getAuthHeaders = () => {
   const token = localStorage.getItem("token");
-  if (token) {
-    return {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
-    };
+
+  return token
+    ? {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      }
+    : {
+        "Content-Type": "application/json",
+      };
+};
+
+const handleResponse = async (response, errorMessage) => {
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.message || errorMessage);
   }
-  return {
-    "Content-Type": "application/json",
-  };
+  return response.json();
 };
 
 export const api = {
@@ -18,71 +32,59 @@ export const api = {
     register: async (userData) => {
       const response = await fetch(`${BASE_URL}/auth/register`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: getAuthHeaders(),
         body: JSON.stringify(userData),
       });
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.message || "Registration failed");
-      }
-      return response.json();
+
+      return handleResponse(response, "Registration failed");
     },
+
     login: async (credentials) => {
       const response = await fetch(`${BASE_URL}/auth/login`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: getAuthHeaders(),
         body: JSON.stringify(credentials),
       });
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.message || "Login failed");
-      }
-      return response.json();
+
+      return handleResponse(response, "Login failed");
     },
   },
+
   user: {
     getProfile: async () => {
       const response = await fetch(`${BASE_URL}/user/profile`, {
         method: "GET",
         headers: getAuthHeaders(),
       });
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.message || "Failed to fetch profile");
-      }
-      return response.json();
+
+      return handleResponse(response, "Failed to fetch profile");
     },
   },
+
   crypto: {
     getAll: async () => {
-      const response = await fetch(`${BASE_URL}/crypto`, {
-        method: "GET",
-      });
-      if (!response.ok) throw new Error("Failed to fetch crypto data");
-      return response.json();
+      const response = await fetch(`${BASE_URL}/crypto`);
+      return handleResponse(response, "Failed to fetch crypto data");
     },
+
     getGainers: async () => {
-      const response = await fetch(`${BASE_URL}/crypto/gainers`, {
-        method: "GET",
-      });
-      if (!response.ok) throw new Error("Failed to fetch gainers data");
-      return response.json();
+      const response = await fetch(`${BASE_URL}/crypto/gainers`);
+      return handleResponse(response, "Failed to fetch gainers data");
     },
+
     getNew: async () => {
-      const response = await fetch(`${BASE_URL}/crypto/new`, {
-        method: "GET",
-      });
-      if (!response.ok) throw new Error("Failed to fetch new crypto data");
-      return response.json();
+      const response = await fetch(`${BASE_URL}/crypto/new`);
+      return handleResponse(response, "Failed to fetch new crypto data");
     },
+
     addCrypto: async (cryptoData) => {
       const response = await fetch(`${BASE_URL}/crypto`, {
         method: "POST",
         headers: getAuthHeaders(),
         body: JSON.stringify(cryptoData),
       });
-      if (!response.ok) throw new Error("Failed to add crypto");
-      return response.json();
+
+      return handleResponse(response, "Failed to add crypto");
     },
   },
 };

@@ -326,7 +326,7 @@ function AllSetStep({ onContinue }) {
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "../components/ui/Logo";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../context/auth-context";
 
 
 /* ════════════════════════════════════════════════════

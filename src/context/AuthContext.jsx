@@ -1,32 +1,54 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { api } from "../services/api";
-
-const AuthContext = createContext();
-
-export const useAuth = () => useContext(AuthContext);
+import { AuthContext } from "./auth-context";
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const checkAuth = async () => {
+  const fetchAuthenticatedUser = useCallback(async () => {
     const token = localStorage.getItem("token");
-    if (token) {
-      try {
-        const userData = await api.user.getProfile();
-        setUser(userData);
-      } catch (error) {
-        console.error("Failed to fetch profile:", error);
-        localStorage.removeItem("token");
-        setUser(null);
-      }
+
+    if (!token) {
+      return null;
     }
+
+    try {
+      return await api.user.getProfile();
+    } catch (error) {
+      console.error("Failed to fetch profile:", error);
+      localStorage.removeItem("token");
+      return null;
+    }
+  }, []);
+
+  const checkAuth = useCallback(async () => {
+    const nextUser = await fetchAuthenticatedUser();
+    setUser(nextUser);
     setLoading(false);
-  };
+    return nextUser;
+  }, [fetchAuthenticatedUser]);
 
   useEffect(() => {
-    checkAuth();
-  }, []);
+    let isActive = true;
+
+    const syncAuth = async () => {
+      const nextUser = await fetchAuthenticatedUser();
+
+      if (!isActive) {
+        return;
+      }
+
+      setUser(nextUser);
+      setLoading(false);
+    };
+
+    syncAuth();
+
+    return () => {
+      isActive = false;
+    };
+  }, [fetchAuthenticatedUser]);
 
   const login = async (email, password) => {
     const data = await api.auth.login({ email, password });

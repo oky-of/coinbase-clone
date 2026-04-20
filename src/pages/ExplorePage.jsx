@@ -6,6 +6,7 @@ import Container from "../components/ui/Container";
 import Button from "../components/ui/Button";
 import FilterDropdown from "../components/ui/FilterDropdown";
 import { api } from "../services/api";
+import { normalizeBackendCoin } from "../utils/crypto";
 
 /* ═══════════════════════════════════════════════
 	CONSTANTS & DATA
@@ -73,6 +74,7 @@ const COIN_META = [
 ];
 
 const COIN_META_MAP = Object.fromEntries(COIN_META.map((c) => [c.binance, c]));
+const COIN_SYMBOL_META_MAP = Object.fromEntries(COIN_META.map((c) => [c.symbol, c]));
 const BINANCE_SYMBOLS = encodeURIComponent(
   JSON.stringify(COIN_META.map((c) => c.binance)),
 );
@@ -663,6 +665,11 @@ const ExplorePage = () => {
   const [showMoreStats, setShowMoreStats] = useState(false);
   const [showMorePrices, setShowMorePrices] = useState(false);
 
+  const updatePageState = useCallback((setter, nextValue) => {
+    setter(nextValue);
+    setCurrentPage(1);
+  }, []);
+
   // Derived currency label & rate
   const currLabel = currency.toUpperCase();
   const getRate = useCallback(() => {
@@ -710,15 +717,22 @@ const ExplorePage = () => {
       const rate = getRate();
       return data
         .map((t) => {
+          const symbol = String(t?.symbol || t?.id || "").trim().toUpperCase();
+          const fallbackMeta = COIN_SYMBOL_META_MAP[symbol];
+          const normalized = normalizeBackendCoin(t, fallbackMeta);
+
+          if (!normalized) {
+            return null;
+          }
+
           return {
-            id: t._id || t.id || t.symbol,
-            name: t.name,
-            symbol: t.symbol,
-            image: t.image || (t.symbol ? getCoinIcon(t.symbol) : ""),
-            current_price: (t.current_price || t.price || 0) * rate,
-            price_change_percentage_24h: t.price_change_percentage_24h || t.change24h || 0,
-            market_cap: (t.market_cap || t.mktCap || 0) * rate,
-            total_volume: (t.total_volume || t.volume || 0) * rate,
+            ...normalized,
+            image:
+              normalized.image ||
+              (normalized.symbol ? getCoinIcon(normalized.symbol) : ""),
+            current_price: normalized.current_price * rate,
+            market_cap: normalized.market_cap * rate,
+            total_volume: normalized.total_volume * rate,
           };
         })
         .filter(Boolean);
@@ -756,11 +770,6 @@ const ExplorePage = () => {
       clearInterval(id);
     };
   }, [fetchPrices, buildCoins]);
-
-  /* ── Reset page when filters change ── */
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [assetFilter, timePeriod, currency, rowsPerPage, searchQuery]);
 
   /* ── Get change value (we only have 24h from Binance) ── */
   const getCoinChange = (coin) => coin.price_change_percentage_24h ?? null;
@@ -909,7 +918,9 @@ const ExplorePage = () => {
                     type="text"
                     placeholder="Search for an asset"
                     value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onChange={(e) =>
+                      updatePageState(setSearchQuery, e.target.value)
+                    }
                     className="w-full pl-11 pr-4 py-3 rounded-full bg-gray-5 text-body text-gray-100 outline-none hover:bg-gray-10 focus:bg-white focus:border focus:border-blue-60 transition-colors duration-200 placeholder:text-gray-60"
                   />
                 </div>
@@ -1058,7 +1069,7 @@ const ExplorePage = () => {
                     label="All assets"
                     value={assetFilter}
                     options={ASSET_FILTERS}
-                    onChange={setAssetFilter}
+                    onChange={(value) => updatePageState(setAssetFilter, value)}
                     icon={<GlobeIcon />}
                   />
 
@@ -1067,7 +1078,7 @@ const ExplorePage = () => {
                     label="1D"
                     value={timePeriod}
                     options={TIME_PERIODS}
-                    onChange={setTimePeriod}
+                    onChange={(value) => updatePageState(setTimePeriod, value)}
                   />
 
                   {/* Currency */}
@@ -1075,7 +1086,7 @@ const ExplorePage = () => {
                     label="GHS"
                     value={currency}
                     options={CURRENCIES}
-                    onChange={setCurrency}
+                    onChange={(value) => updatePageState(setCurrency, value)}
                     searchable
                   />
 
@@ -1084,7 +1095,7 @@ const ExplorePage = () => {
                     label="10 rows"
                     value={rowsPerPage}
                     options={ROWS_OPTIONS}
-                    onChange={setRowsPerPage}
+                    onChange={(value) => updatePageState(setRowsPerPage, value)}
                   />
                 </div>
 
