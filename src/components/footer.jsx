@@ -295,8 +295,8 @@ const FooterSection = ({ title, links }) => (
 
 const CoinbaseLogo = ({ height = 60 }) => (
   <img
-    src="https://static-assets.coinbase.com/ui-infra/illustration/v1/pictogram/svg/light/coinbaseLogoNavigation-4.svg"
-    alt="Coinbase"
+    src="/src/assets/coinbashLogoNavigation-4.svg"
+    alt="Coinbash"
     height={height}
     style={{ height: `${height}px`, width: "auto", display: "block" }}
   />

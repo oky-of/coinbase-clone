@@ -365,7 +365,7 @@ const MENUS = {
     featured: {
       image: (
         <img
-          src="https://static-assets.coinbase.com/growth/acquisition/global-nav/onchain_payment_protocol.png"
+          src="/src/assets/commerce.png"
           alt="Commerce Payments Protocol"
           className="w-full h-full object-cover"
         />
@@ -441,7 +441,7 @@ const MENUS = {
     featured: {
       image: (
         <img
-          src="https://static-assets.coinbase.com/growth/acquisition/global-nav/upsell/institutions_upsell.png"
+          src="/src/assets/institutions_upsell.png"
           alt="Our clients"
           className="w-full h-full object-cover"
         />
@@ -511,7 +511,7 @@ const MENUS = {
     featured: {
       image: (
         <img
-          src="https://static-assets.coinbase.com/growth/acquisition/global-nav/upsell/developers_upsell_cdxv2_2.jpg"
+          src="/src/assets/developers_upsell_cdxv2_2.jpg"
           alt="Developer platform"
           className="w-full h-full object-cover"
         />
@@ -569,7 +569,7 @@ const MENUS = {
     featured: {
       image: (
         <img
-          src="https://static-assets.coinbase.com/growth/acquisition/global-nav/upsell/company_upsell.png"
+          src="/src/assets/company_upsell.png"
           alt="About Coinbase"
           className="w-full h-full object-cover"
         />
