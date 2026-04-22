@@ -3,17 +3,17 @@ import { Link } from 'react-router-dom';
 const articles = [
 	{
 		id: 1,
-		href: 'https://www.coinbase.com/usdc',
+		href: '#',
 		title: 'USDC: The digital dollar for the global crypto economy',
 		description:
-			'Coinbase believes crypto will be part of the solution for creating an open financial system that is both more efficient and more equitable. We co-founded the Centre Consortium in 2018 to invest in the build of USDC, and since then it has become the second largest stablecoin by market capitalization.',
+			'Stablecoins like USDC are often used to move value across crypto markets while staying pegged to the US dollar. They are a common starting point for understanding digital payments and onchain finance.',
 		image:
 			'https://images.ctfassets.net/o10es7wu5gm1/2tI0D7cX30gXudggzQc3tr/b6181107533f98f9dcc64da96efacff8/0_4mVyVaU6yLa--GR_',
 		alt: 'Blue circle with USDC money symbol',
 	},
 	{
 		id: 2,
-		href: 'https://www.coinbase.com/learn/crypto-basics/can-crypto-really-replace-your-bank',
+		href: '#',
 		title: 'Can crypto really replace your bank account?',
 		description:
 			"If you're a big enough fan of crypto, you've probably heard the phrase 'be your own bank' or the term 'bankless' — the idea being that crypto can offer more control over your financial future than traditional finance. But how much of your financial life really can be accomplished via crypto?",
@@ -23,7 +23,7 @@ const articles = [
 	},
 	{
 		id: 3,
-		href: 'https://www.coinbase.com/learn/tips-and-tutorials/dollar-cost-averaging',
+		href: '#',
 		title: 'When is the best time to invest in crypto?',
 		description:
 			'Cryptocurrencies like Bitcoin can experience daily (or even hourly) price volatility. As with any kind of investment, volatility may cause uncertainty, fear of missing out, or fear of participating at all. When prices are fluctuating, how do you know when to buy?',

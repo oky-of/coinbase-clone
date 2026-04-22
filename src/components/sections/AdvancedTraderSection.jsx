@@ -23,7 +23,7 @@ const AdvancedTraderSection = () => {
 							Powerful tools, designed  for the advanced trader.
 						</h2>
 						<p className="text-[16px] text-gray-40 mb-8 max-w-lg">
-							Powerful analytical tools with the safety and security of Coinbase deliver the ultimate trading experience. Tap into sophisticated charting capabilities, real-time order books, and deep liquidity across hundreds of markets.
+							Powerful analytical tools help deliver a confident trading experience. Tap into sophisticated charting capabilities, real-time order books, and deep liquidity across hundreds of markets.
 						</p>
 						<Button variant="secondary" size="xl" className="bg-black! text-white! hover:bg-gray-80! text-xl p-4 px-8">
 							Start trading

@@ -3,7 +3,7 @@ import Button from '../ui/Button';
 import Badge from '../ui/Badge';
 import Logo from '../ui/Logo';
 
-const CoinbaseOneSection = () => {
+const PremiumSection = () => {
 	return (
 		<section className="py-16 md:py-24 bg-white">
 			<Container>
@@ -12,7 +12,7 @@ const CoinbaseOneSection = () => {
 					<div className="w-full md:w-1/2">
 						<Badge className="mb-6 ">
 							<Logo height={16} className="inline-block brightness-0" />
-							COINBASE ONE
+							NEXUS PLUS
 						</Badge>
 						<h2 className="text-display-3 md:text-display-2 text-gray-100 mb-4">
 							Zero trading fees, more rewards.
@@ -29,7 +29,7 @@ const CoinbaseOneSection = () => {
 						<div className="w-full ">
 							<img
 								src="https://images.ctfassets.net/o10es7wu5gm1/4CyfFj8M0X8tKnzh8AgdxT/f0fa52750499d9b1691f62880906ff3e/zero_fees_us.png?fm=avif&w=1320&h=1320&q=65"
-								alt="Coinbase One mobile app"
+								alt="Premium membership preview"
 								className="rounded-[3rem] shadow-md bg-gray-10 w-full h-108"
 							/>
 						</div>
@@ -40,4 +40,8 @@ const CoinbaseOneSection = () => {
 	);
 };
 
-export default CoinbaseOneSection;
+export default PremiumSection;
+
+
+
+

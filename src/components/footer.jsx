@@ -38,7 +38,7 @@ const COLUMNS = [
             label: "Market statistics",
           },
           {
-            label: "Coinbase Bytes newsletter",
+            label: "Market newsletter",
           },
           {
             label: "Crypto basics",
@@ -85,7 +85,7 @@ const COLUMNS = [
             label: "Earn free crypto",
           },
           { label: "Base App" },
-          { label: "Coinbase One" },
+          { label: "Nexus Plus" },
           { label: "Debit Card" },
         ],
       },
@@ -96,7 +96,7 @@ const COLUMNS = [
             label: "Asset Listings",
           },
           {
-            label: "Coinbase Business",
+            label: "Business accounts",
           },
           { label: "Payments" },
           { label: "Commerce" },
@@ -293,7 +293,7 @@ const FooterSection = ({ title, links }) => (
   </div>
 );
 
-const CoinbaseLogo = ({ height = 60 }) => (
+const FooterLogo = ({ height = 60 }) => (
   <img
     src="/src/assets/coinbashLogoNavigation-4.svg"
     alt="Coinbash"
@@ -313,14 +313,14 @@ const Footer = () => {
       <div className="w-full max-w-400 pt-6 pb-8 px-4 md:pt-16 md:max-w-307 lg:px-12 lg:pt-20 lg:max-w-400">
         {/* Logo — mobile only */}
         <div className="mb-8 lg:hidden">
-          <CoinbaseLogo />
+          <FooterLogo />
         </div>
 
         
         <div className="flex flex-col lg:flex-row gap-10">
          
           <div className="hidden lg:flex flex-col items-start shrink-0 w-[20%] pt-0.5">
-            <CoinbaseLogo />
+            <FooterLogo />
           </div>
 
          
@@ -347,7 +347,7 @@ const Footer = () => {
                 href={s.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                title={`Coinbase ${s.label} page`}
+                title={`Crypto Nexus ${s.label} page`}
                 className="opacity-100 hover:opacity-70 transition-opacity duration-150">
                 <img
                   src={s.icon}
@@ -368,7 +368,7 @@ const Footer = () => {
             {/* Left: copyright + legal links */}
             <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
               <p className="text-[0.8125rem] leading-5 text-gray-100 m-0">
-                © {new Date().getFullYear()} Coinbase
+                © {new Date().getFullYear()} Crypto Nexus
               </p>
               <span className="text-gray-40 text-[0.8125rem]">•</span>
               <a

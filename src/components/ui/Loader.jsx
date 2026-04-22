@@ -1,6 +1,6 @@
 import Logo from './Logo';
 
-/* Coinbase full-screen loader — wordmark mono on dark bg */
+/* Full-screen loader — wordmark mono on dark bg */
 const Loader = ({ fullScreen = true }) => {
 	const content = (
 		<div className="flex items-center justify-center">
@@ -20,3 +20,6 @@ const Loader = ({ fullScreen = true }) => {
 };
 
 export default Loader;
+
+
+

@@ -4,8 +4,8 @@ const WarningBanner = () => {
   return (
     <div style={styles.banner}>
       <p style={styles.text}>
-        ⚠️ This is a student project for educational purposes only. ⚠️ It is not
-        affiliated with Coinbase or any financial institution.
+        Warning: This is a student project for educational purposes only. It is
+        not affiliated with Coinbase or any financial institution.
       </p>
     </div>
   );

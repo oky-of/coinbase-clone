@@ -147,7 +147,7 @@ const SignIn = () => {
           {step === "email" && (
             <form onSubmit={handleEmailContinue}>
               <h1 className="text-[1.75rem] font-bold text-white mb-6">
-                Sign in to Coinbase
+                Sign in to Crypto Nexus
               </h1>
               <span className="text-red-500  font-normal ">
                 Demo app - do not use your real email
@@ -230,7 +230,7 @@ const SignIn = () => {
           {step === "password" && (
             <form onSubmit={handlePasswordContinue}>
               <h1 className="text-[1.75rem] font-bold text-white mb-6">
-                Sign in to Coinbase
+                Sign in to Crypto Nexus
               </h1>
 
               {/* Email display pill */}

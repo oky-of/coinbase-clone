@@ -17,7 +17,7 @@ import ExplorePage from './pages/ExplorePage';
 import LearnPage from './pages/LearnPage';
 import Loader from './components/ui/Loader';
 import WarningBanner from './components/WarningBanner';
-import CoinbaseOneSection from './components/sections/CoinbaseOneSection';
+import PremiumSection from './components/sections/CoinbaseOneSection';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import ProfilePage from './pages/ProfilePage';
@@ -30,7 +30,7 @@ const Home = () => (
       <HeroSection />
       <ExploreCryptoSection />
       <AdvancedTraderSection />
-      <CoinbaseOneSection/>
+      <PremiumSection />
       <BaseAppSection />
       <LearnSection />
       <TakeControlSection />
@@ -71,3 +71,5 @@ const App = () => {
 };
 
 export default App;
+
+

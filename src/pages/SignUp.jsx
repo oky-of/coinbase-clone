@@ -242,7 +242,7 @@ function PreviewAddressStep({ file, onConfirm, onReupload }) {
         </h2>
         <p className="text-[#8A919E] mb-6">
           Make sure that the address listed on your document and the address you
-          entered on Coinbase match exactly.
+          entered in this demo match exactly.
         </p>
         <div className="flex flex-col items-center mb-8">
           {file && file.type.startsWith("image") ? (
@@ -536,7 +536,7 @@ const StepEmail = ({ name, setName, email, setEmail, password, setPassword, onSu
         Create your account
       </h1>
       <p className="text-[0.9375rem] text-[#8A919E] mb-6 leading-6">
-        Access all that Coinbase has to offer with a single account.
+        Access all that Crypto Nexus has to offer with a single account.
       </p>
       <span className="text-red-500  font-normal ">
         Demo app - do not use your real email
@@ -869,7 +869,7 @@ const StepEmailOptIn = ({ onNext }) => (
         Be the first to know
       </h1>
       <p className="text-[0.9375rem] text-[#8A919E] mb-4 leading-6 max-w-sm">
-        Would you like to receive emails from Coinbase on price updates, product
+        Would you like to receive emails on price updates, product
         announcements, and trading insights we think you might be interested in?
       </p>
       <p className="text-[0.9375rem] text-[#8A919E] mb-8 leading-6 max-w-sm">
@@ -904,7 +904,7 @@ const StepCountry = ({
         Where are you from?
       </h1>
       <p className="text-[0.9375rem] text-[#8A919E] mb-6 leading-6">
-        Coinbase is{" "}
+        This experience is{" "}
         <a href="#" className="underline text-white hover:text-[#0052FF]">
           legally required
         </a>{" "}
@@ -964,7 +964,7 @@ const StepBirth = ({ city, setCity, country, setCountry, onNext }) => (
         Enter your place of birth
       </h1>
       <p className="text-[0.9375rem] text-[#8A919E] mb-6 leading-6">
-        Coinbase is legally required to collect this info.
+        This demo flow is designed to mirror a regulated onboarding experience.
       </p>
       <DarkInput
         label="City of birth"

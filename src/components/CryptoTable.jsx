@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { api } from "../services/api";
 import { normalizeBackendCoin } from "../utils/crypto";
 
-const tabs = ["Tradable", "Top gainers", "New on Coinbase"];
+const tabs = ["Tradable", "Top gainers", "Recently added"];
 const POLL_MS = 3000;
 const FALLBACK_GHS = 16.5;
 
@@ -308,7 +308,7 @@ const CryptoTable = () => {
               b.price_change_percentage_24h - a.price_change_percentage_24h,
           )
           .slice(0, 6);
-      case "New on Coinbase":
+      case "Recently added":
         return allCoins.slice(-6).reverse();
       default:
         return [];

@@ -5,7 +5,7 @@ const TakeControlSection = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		const target = `https://www.coinbase.com/signup${email ? `?email=${encodeURIComponent(email)}` : ''}`;
+		const target = `/signup${email ? `?email=${encodeURIComponent(email)}` : ''}`;
 		window.open(target, '_blank', 'noopener,noreferrer');
 	};
 
@@ -90,7 +90,7 @@ const TakeControlSection = () => {
 								/>
 								<img
 									src="https://images.ctfassets.net/o10es7wu5gm1/3Ib1lnukt8MvV4bDjH2jm7/00bd55a880ce264f3b77253b837760b2/image.png"
-									alt="Coinbase Homepage Crypto Circle"
+									alt="Crypto portfolio illustration"
 									loading="eager"
 									width="4256"
 									height="3200"

@@ -502,7 +502,7 @@ const NewCoinCard = ({ coin }) => (
 );
 
 /* ═══════════════════════════════════════════════
-	SPARKLINE GENERATOR (Coinbase-style with smooth bezier curves)
+	SPARKLINE GENERATOR (smooth bezier curves)
 	═══════════════════════════════════════════════ */
 function _generateSparklineData(changePct, coinId = "", W = 120, H = 40) {
   const pts = 24;
@@ -602,7 +602,7 @@ const TableLineChart = () => {
   );
 };
 
-/* Coinbase-style market stat chart with line + dotted fill */
+/* Market stat chart with line + dotted fill */
 const StatChart = () => {
   return (
     <svg height="60" width="240">
@@ -898,7 +898,7 @@ const ExplorePage = () => {
                     Explore crypto
                   </h1>
                   <p className="text-body text-gray-60 mt-1 flex items-center gap-1">
-                    Coinbase 50 Index is down{" "}
+                    Market Pulse Index is down{" "}
                     <span className="text-red-60">↘ 1.23%</span> (24hrs)
                     <svg
                       className="w-4 h-4 text-gray-40"
@@ -1285,7 +1285,7 @@ const ExplorePage = () => {
                 <div className="py-8 md:py-12 px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-8">
                   <div className="flex-1">
                     <h2 className="text-3xl text-white mb-6 max-w-lg">
-                      Create a Coinbase account to trade crypto. It's quick,
+                      Create a Crypto Nexus account to trade crypto. It's quick,
                       easy, and secure.
                     </h2>
                     <Link to="/signup">
@@ -1381,11 +1381,11 @@ const ExplorePage = () => {
                 </div>
               </div>
 
-              {/* New on Coinbase */}
+              {/* Recently added */}
               <div>
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="text-headline text-gray-100">
-                    New on Coinbase
+                    Recently added
                   </h3>
                   <div className="flex gap-1">
                     <button className="w-7 h-7 rounded-full border border-gray-20 flex items-center justify-center text-gray-60 hover:bg-gray-5 transition-colors">
@@ -1419,3 +1419,6 @@ const ExplorePage = () => {
 };
 
 export default ExplorePage;
+
+
+

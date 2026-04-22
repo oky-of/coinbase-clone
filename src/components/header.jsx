@@ -260,9 +260,9 @@ const MENUS = {
         },
         {
           icon: <OneIcon />,
-          title: "Coinbase One",
+          title: "Nexus Plus",
           desc: "Get zero trading fees and more",
-          href: "https://coinbase.com/one?referrer=logged_out",
+          href: "#",
         },
         {
           icon: <DiamondIcon />,
@@ -280,7 +280,7 @@ const MENUS = {
           icon: <LearnIcon />,
           title: "Learn",
           desc: "Crypto education and resources",
-          href: "https://www.coinbase.com/learn",
+          href: "#",
         },
       ],
       [
@@ -288,7 +288,7 @@ const MENUS = {
           icon: <AdvancedIcon />,
           title: "Advanced",
           desc: "Professional-grade trading tools",
-          href: "https://www.coinbase.com/advanced-trade",
+          href: "#",
         },
         {
           icon: <EarnIcon />,
@@ -298,7 +298,7 @@ const MENUS = {
         },
         {
           icon: <WealthIcon />,
-          title: "Coinbase Wealth",
+          title: "Private Wealth",
           desc: "Institutional-grade services for UHNW",
           href: "#",
         },
@@ -325,7 +325,7 @@ const MENUS = {
         />
       ),
       title: "System Update 2025",
-      description: "The next chapter of Coinbase. Live on X 12/17.",
+      description: "A closer look at the next phase of modern crypto infrastructure.",
       linkText: "Learn more",
       href: "#",
     },
@@ -343,7 +343,7 @@ const MENUS = {
         {
           icon: <ListingsIcon />,
           title: "Asset Listings",
-          desc: "List your asset on Coinbase",
+          desc: "List your asset on a major digital marketplace",
           href: "#",
         },
       ],
@@ -456,7 +456,7 @@ const MENUS = {
   Developers: {
     cols: [
       {
-        header: { label: "Coinbase Developer Platform", href: "#" },
+        header: { label: "Developer Platform", href: "#" },
         items: [
           {
             icon: <EyeIcon />,
@@ -479,7 +479,7 @@ const MENUS = {
           {
             icon: <EarnIcon />,
             title: "Stablecoins",
-            desc: "Access USDC and Coinbase Custom Stablecoins",
+            desc: "Access USDC and custom stablecoin tooling",
             href: "#",
           },
         ],
@@ -517,7 +517,7 @@ const MENUS = {
         />
       ),
       title: "World class crypto infrastructure.",
-      description: "Discover Coinbase's complete crypto-as-a-service platform.",
+      description: "Discover a complete crypto-as-a-service platform.",
       linkText: "Learn more",
       href: "#",
     },
@@ -541,7 +541,7 @@ const MENUS = {
         {
           icon: <NewsIcon />,
           title: "Blog",
-          desc: "Read the latest from Coinbase",
+          desc: "Read the latest market and product updates",
           href: "#",
         },
       ],
@@ -570,11 +570,11 @@ const MENUS = {
       image: (
         <img
           src="/src/assets/company_upsell.png"
-          alt="About Coinbase"
+          alt="About Crypto Nexus"
           className="w-full h-full object-cover"
         />
       ),
-      title: "Learn all about Coinbase:",
+      title: "Learn all about Crypto Nexus:",
       description: "We're building the open financial system.",
       linkText: "Create your account",
       href: "#",
@@ -755,7 +755,7 @@ const Header = () => {
             </div>
           ) : (
             <div className="flex items-end gap-2 ml-40">
-              {/* Search — Coinbase icon, gray bg */}
+              {/* Search — interface icon button */}
               <button
                 onClick={openSearch}
                 className="hidden md:flex w-10 h-10 items-center justify-center rounded-full bg-gray-10 hover:bg-gray-15 transition-colors">
@@ -767,7 +767,7 @@ const Header = () => {
                 </svg>
               </button>
 
-              {/* Globe — Coinbase icon, gray bg */}
+              {/* Globe — interface icon button */}
               <div className="relative ">
                 <button
                   onClick={() => setLangOpen((v) => !v)}
@@ -844,3 +844,8 @@ const Header = () => {
 };
 
 export default Header;
+
+
+
+
+
