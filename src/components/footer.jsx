@@ -11,20 +11,20 @@ const COLUMNS = [
         title: "Company",
         links: [
           { label: "About" },
-          { label: "Careers"},
-          { label: "Affiliates"},
-          { label: "Blog"},
-          { label: "Press"},
-          { label: "Security"},
-          { label: "Investors"},
+          { label: "Careers" },
+          { label: "Affiliates" },
+          { label: "Blog" },
+          { label: "Press" },
+          { label: "Security" },
+          { label: "Investors" },
           {
             label: "Vendors",
           },
-          { label: "Legal & privacy"},
+          { label: "Legal & privacy" },
           {
             label: "Cookie policy",
           },
-          { label: "Cookie preferences"},
+          { label: "Cookie preferences" },
           {
             label: "Digital Asset Disclosures",
           },
@@ -33,7 +33,7 @@ const COLUMNS = [
       {
         title: "Learn",
         links: [
-          { label: "Explore"},
+          { label: "Explore" },
           {
             label: "Market statistics",
           },
@@ -121,7 +121,7 @@ const COLUMNS = [
             label: "Verified Pools",
           },
         ],
-      },  
+      },
     ],
   },
   {
@@ -242,7 +242,7 @@ const COLUMNS = [
           {
             label: "NVIDIA price",
           },
-          { label: "Apple price"},
+          { label: "Apple price" },
           {
             label: "Microsoft price",
           },
@@ -258,7 +258,7 @@ const COLUMNS = [
 const SOCIALS = [
   {
     label: "X",
-  
+
     icon: "https://static-assets.coinbase.com/marketing/cdx/x-light.svg",
   },
   {
@@ -295,7 +295,7 @@ const FooterSection = ({ title, links }) => (
 
 const FooterLogo = ({ height = 60 }) => (
   <img
-    src="/src/assets/coinbashLogoNavigation-4.svg"
+    src="/coinbashLogoNavigation-4.svg"
     alt="Coinbash"
     height={height}
     style={{ height: `${height}px`, width: "auto", display: "block" }}
@@ -316,16 +316,15 @@ const Footer = () => {
           <FooterLogo />
         </div>
 
-        
         <div className="flex flex-col lg:flex-row gap-10">
-         
           <div className="hidden lg:flex flex-col items-start shrink-0 w-[20%] pt-0.5">
             <FooterLogo />
           </div>
 
-         
           {COLUMNS.map((col) => (
-            <div key={col.id} className="flex lg:flex-col lg:gap-10 gap-5 lg:flex-1">
+            <div
+              key={col.id}
+              className="flex lg:flex-col lg:gap-10 gap-5 lg:flex-1">
               {col.sections.map((section) => (
                 <FooterSection
                   key={section.title}
@@ -337,9 +336,7 @@ const Footer = () => {
           ))}
         </div>
 
-       
         <div className="flex flex-col gap-4 mt-12">
-         
           <div className="flex items-center gap-4">
             {SOCIALS.map((s) => (
               <a
@@ -371,17 +368,18 @@ const Footer = () => {
                 © {new Date().getFullYear()} Crypto Nexus
               </p>
               <span className="text-gray-40 text-[0.8125rem]">•</span>
-              <a
-                className="text-[0.8125rem] leading-5 text-gray-60 hover:text-gray-100 transition-colors">
+              <a className="text-[0.8125rem] leading-5 text-gray-60 hover:text-gray-100 transition-colors">
                 Privacy
               </a>
               <span className="text-gray-40 text-[0.8125rem]">•</span>
-              <a
-                className="text-[0.8125rem] leading-5 text-gray-60 hover:text-gray-100 transition-colors">
+              <a className="text-[0.8125rem] leading-5 text-gray-60 hover:text-gray-100 transition-colors">
                 Terms &amp; Conditions
               </a>
-              <a 
-              className="text-red-600  font-medium text-[0.90rem]">Disclaimer: This is a demo application built for educational purposes only and is not affiliated with Coinbase or any financial institution.</a>
+              <a className="text-red-600  font-medium text-[0.90rem]">
+                Disclaimer: This is a demo application built for educational
+                purposes only and is not affiliated with Coinbase or any
+                financial institution.
+              </a>
             </div>
 
             {/* Right: locale selector button */}

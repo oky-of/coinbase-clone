@@ -29,7 +29,7 @@ const Icon = ({ children }) => (
   </svg>
 );
 const BuySellIcon = () => (
-<Icon>
+  <Icon>
     <circle cx="12" cy="12" r="9" />
     <path d="M8 12h8M12 8l4 4-4 4" />
   </Icon>
@@ -325,7 +325,8 @@ const MENUS = {
         />
       ),
       title: "System Update 2025",
-      description: "A closer look at the next phase of modern crypto infrastructure.",
+      description:
+        "A closer look at the next phase of modern crypto infrastructure.",
       linkText: "Learn more",
       href: "#",
     },
@@ -365,7 +366,7 @@ const MENUS = {
     featured: {
       image: (
         <img
-          src="/src/assets/commerce.png"
+          src="/commerce.png"
           alt="Commerce Payments Protocol"
           className="w-full h-full object-cover"
         />
@@ -441,7 +442,7 @@ const MENUS = {
     featured: {
       image: (
         <img
-          src="/src/assets/institutions_upsell.png"
+          src="/institutions_upsell.png"
           alt="Our clients"
           className="w-full h-full object-cover"
         />
@@ -511,7 +512,7 @@ const MENUS = {
     featured: {
       image: (
         <img
-          src="/src/assets/developers_upsell_cdxv2_2.jpg"
+          src="/developers_upsell_cdxv2_2.jpg"
           alt="Developer platform"
           className="w-full h-full object-cover"
         />
@@ -569,7 +570,7 @@ const MENUS = {
     featured: {
       image: (
         <img
-          src="/src/assets/company_upsell.png"
+          src="/company_upsell.png"
           alt="About Crypto Nexus"
           className="w-full h-full object-cover"
         />
@@ -616,22 +617,26 @@ const DropdownContent = ({ menuKey }) => {
                   )}
                   <div className="flex flex-col">
                     {col.items.map((item) => (
-                      <NavMenuItem  key={item.title}
-                  icon={item.icon}
-                  title={item.title}
-                  description={item.desc} 
-                  href={item.href}/>
+                      <NavMenuItem
+                        key={item.title}
+                        icon={item.icon}
+                        title={item.title}
+                        description={item.desc}
+                        href={item.href}
+                      />
                     ))}
                   </div>
                 </>
               ) : (
                 <div className="flex flex-col">
                   {col.map((item) => (
-                    <NavMenuItem key={item.title}
-                  icon={item.icon}
-                  title={item.title}
-                  description={item.desc}
-                  href={item.href} />
+                    <NavMenuItem
+                      key={item.title}
+                      icon={item.icon}
+                      title={item.title}
+                      description={item.desc}
+                      href={item.href}
+                    />
                   ))}
                 </div>
               )}
@@ -844,8 +849,3 @@ const Header = () => {
 };
 
 export default Header;
-
-
-
-
-
